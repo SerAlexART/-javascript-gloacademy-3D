@@ -1,9 +1,5 @@
 'use strict';
 
-// console.log('Index.js - test.');
+import timer from './modules/timer';
 
-import one from './modules/one';
-import two from './modules/two';
-
-one();
-two();
+timer('2 february 2024');
