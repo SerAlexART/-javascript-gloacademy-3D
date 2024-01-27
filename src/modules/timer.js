@@ -38,7 +38,6 @@ const timer = (deadline) => {
     const updateClock = () => {
         let getTime = getTimeRemaining();
 
-
         if (getTime.timeRemaining >= 0) {
             timerDays.textContent = getTime.days < 10 ? '0' + getTime.days : getTime.days;
             timerHours.textContent = getTime.hours < 10 ? '0' + getTime.hours : getTime.hours;
