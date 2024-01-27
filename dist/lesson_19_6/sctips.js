@@ -1,12 +1,12 @@
 'use strict';
 
 const time = () => {
-    // Функция определяет данные
     const timesOfDay = document.getElementById('times-day');
     const dayWeek = document.getElementById('day-week');
     const currentTimeLocal = document.getElementById('current-time');
     const daysLeft = document.getElementById('days-left');
 
+    // Функция определяет данные
     const getTimeInfo = () => {
         const currentTime = new Date();
         const currentYear = new Date().getFullYear();
