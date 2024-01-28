@@ -20,9 +20,10 @@ const modal = () => {
 
         if (countOpacity < 100) {
             setTimeout(animationOpenModal, 5);
+        } else {
+            countOpacity = 0;
         }
     };
-
 
     // Открытие модального окна при нажатии на одну из кнопок "Оставить заявку!"
     buttons.forEach((button) => {
@@ -40,6 +41,9 @@ const modal = () => {
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
     });
+
+
+
 };
 
 export default modal;
