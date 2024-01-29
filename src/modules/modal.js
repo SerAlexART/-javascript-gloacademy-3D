@@ -8,18 +8,18 @@ const modal = () => {
     console.log(windowWidth);
     const mobileWidth = 768;
 
-    let countOpacity = 0;
+    let countOpacity = 0.0;
 
     // Анимация повления модального окна
     const animationOpenModal = () => {
-        countOpacity++;
+        countOpacity = countOpacity + 0.125;
         console.log(countOpacity);
 
-        modal.style.opacity = `${countOpacity}%`;
+        modal.style.opacity = `${countOpacity}`;
 
 
-        if (countOpacity < 100) {
-            setTimeout(animationOpenModal, 5);
+        if (countOpacity < 1) {
+            setTimeout(animationOpenModal, 25);
         } else {
             countOpacity = 0;
         }
