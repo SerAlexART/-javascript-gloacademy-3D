@@ -12,14 +12,14 @@ const modal = () => {
 
     // Анимация повления модального окна
     const animationOpenModal = () => {
-        countOpacity++;
+        countOpacity += 0.125;
         console.log(countOpacity);
 
-        modal.style.opacity = `${countOpacity}%`;
+        modal.style.opacity = `${countOpacity}`;
 
 
-        if (countOpacity < 100) {
-            setTimeout(animationOpenModal, 5);
+        if (countOpacity < 1) {
+            setTimeout(animationOpenModal, 25);
         } else {
             countOpacity = 0;
         }
@@ -41,9 +41,6 @@ const modal = () => {
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
     });
-
-
-
 };
 
 export default modal;
