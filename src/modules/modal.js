@@ -8,11 +8,11 @@ const modal = () => {
     console.log(windowWidth);
     const mobileWidth = 768;
 
-    let countOpacity = 0.0;
+    let countOpacity = 0;
 
     // Анимация повления модального окна
     const animationOpenModal = () => {
-        countOpacity = countOpacity + 0.125;
+        countOpacity += 0.125;
         console.log(countOpacity);
 
         modal.style.opacity = `${countOpacity}`;
@@ -41,9 +41,6 @@ const modal = () => {
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
     });
-
-
-
 };
 
 export default modal;
