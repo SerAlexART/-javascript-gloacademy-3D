@@ -1,11 +1,21 @@
 'use strict';
 
-const validationForm = () => {
+const validationAll = () => {
+    const calcucalor = document.getElementById('calc');
+    const calcucalorInputs = calcucalor.querySelectorAll('[type="text"]');
+
     const names = document.querySelectorAll('.form-name');
     const nameFormFooter = document.getElementById('form2-name');
     const emails = document.querySelectorAll('.form-email');
     const phones = document.querySelectorAll('.form-phone');
     const messages = document.querySelectorAll('[placeholder="Ваше сообщение"]');
+
+    // Calculator - Запрет ввода символов кроме цицр для input у калькулятора
+    calcucalorInputs.forEach((input) => {
+        input.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/\D+/, '');
+        });
+    });
 
     // Name - Позволяем ввод только кириллицы в любом регистре, дефиса и пробела
     names.forEach((input) => {
@@ -45,4 +55,4 @@ const validationForm = () => {
     });
 };
 
-export default validationForm;
+export default validationAll;
