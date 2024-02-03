@@ -1,11 +1,14 @@
 'use strict';
 
-const validationForm = () => {
-    const names = document.querySelectorAll('.form-name');
-    const nameFormFooter = document.getElementById('form2-name');
-    const emails = document.querySelectorAll('.form-email');
-    const phones = document.querySelectorAll('.form-phone');
-    const messages = document.querySelectorAll('[placeholder="Ваше сообщение"]');
+const validationForm = (formId) => {
+    const form = document.getElementById(formId);
+
+    console.log(formId);
+
+    const names = form.querySelectorAll('[type="text"]');
+    const messages = form.querySelectorAll('[placeholder="Ваше сообщение"]');
+    const emails = form.querySelectorAll('[type="email"]');
+    const phones = form.querySelectorAll('[type="tel"]');
 
     // Name - Позволяем ввод только кириллицы в любом регистре, дефиса и пробела
     names.forEach((input) => {
@@ -13,11 +16,6 @@ const validationForm = () => {
             console.log(input.value);
             e.target.value = e.target.value.replace(/[^а-яА-Я\-\ ]+/, '');
         });
-    });
-
-    nameFormFooter.addEventListener('input', (e) => {
-        // console.log(input.value);
-        e.target.value = e.target.value.replace(/[^а-яА-Я\-\ ]+/, '');
     });
 
     // Message - Позволяем ввод только кириллицы в любом регистре, дефиса и пробела

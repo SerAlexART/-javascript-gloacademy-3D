@@ -12,4 +12,6 @@ menu();
 modal();
 // validationAll();
 validationCalculator();
-validationForm();
+validationForm('form1');
+validationForm('form2');
+validationForm('form3');
