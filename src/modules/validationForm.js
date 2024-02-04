@@ -3,8 +3,6 @@
 const validationForm = (formId) => {
     const form = document.getElementById(formId);
 
-    console.log(formId);
-
     const names = form.querySelectorAll('[type="text"]');
     const messages = form.querySelectorAll('[placeholder="Ваше сообщение"]');
     const emails = form.querySelectorAll('[type="email"]');

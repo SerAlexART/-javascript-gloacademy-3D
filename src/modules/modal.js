@@ -3,7 +3,7 @@
 const modal = () => {
     const modal = document.querySelector('.popup');
     const buttons = document.querySelectorAll('.popup-btn');
-    const closeBtn = modal.querySelector('.popup-close');
+    // const closeBtn = modal.querySelector('.popup-close');
     const windowWidth = document.documentElement.clientWidth;
     console.log(windowWidth);
     const mobileWidth = 768;
@@ -38,8 +38,18 @@ const modal = () => {
     });
 
     // Закрытие модального окна при нажатии на кнопку X
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
+    // closeBtn.addEventListener('click', () => {
+    //     modal.style.display = 'none';
+    // });
+
+    // Закрытие модального окна при клике на область вне контента
+    modal.addEventListener('click', (e) => {
+        console.log(e.target.closest('.popup-content'));
+
+        if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
+            modal.style.display = 'none';
+            console.log('мимо');
+        }
     });
 };
 
