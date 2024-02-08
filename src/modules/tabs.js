@@ -7,7 +7,7 @@ const tabs = () => {
 
     // Меняем активную кнопку при клике на неё
     tabPanel.addEventListener('click', (e) => {
-        // Проверка, что работаем с элементом у которой родительский класс service-header-tab
+        // Проверка, что работаем с элементом у которого родительский класс service-header-tab
         if (e.target.closest('.service-header-tab')) {
             const tabBtn = e.target.closest('.service-header-tab');
 
