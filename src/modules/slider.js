@@ -3,8 +3,11 @@
 const slider = () => {
     const sliderBlock = document.querySelector('.portfolio-content');
     const slides = document.querySelectorAll('.portfolio-item');
-    const dots = document.querySelectorAll('.dot');
     const timeInterval = 2000;
+    const dotsList = document.querySelector('.portfolio-dots');
+    // console.log(dotsList);
+
+    let dots = document.querySelectorAll('.dot');
 
     // Cчётчик
     let currentSlide = 0;
@@ -12,12 +15,38 @@ const slider = () => {
     // Интервал
     let interval;
 
+    // Добавление dots равное количеству слайдов
+    const addDots = () => {
+        slides.forEach((newDot, index) => {
+            dots = document.querySelectorAll('.dot');
+            newDot = document.createElement('li');
+
+
+            // newDot.classList.add('dot');
+
+            // console.dir(slides[0]);
+            // console.log(slides.length);
+
+            if (dots[index] === 0) {
+                newDot.classList.add('dot');
+                newDot.classList.add('dot-active');
+            } else {
+                newDot.classList.add('dot');
+                // newDot.classList.add('dot-active');
+            }
+
+            // console.log(dots.length);
+            // console.log(dots[0]);
+
+            dotsList.append(newDot);
+        });
+    };
+
     // Показывает предыдущий слайд
     const prevSlide = (elems, index, strClass) => {
         // slides[currentSlide].classList.remove('portfolio-item-active');
         elems[index].classList.remove(strClass);
     };
-
 
     // Показывает следующий слайд
     const nextSlide = (elems, index, strClass) => {
@@ -25,9 +54,9 @@ const slider = () => {
         elems[index].classList.add(strClass);
     };
 
-
     // Метод автоматически переключает слайды
     const autoSlide = () => {
+        dots = document.querySelectorAll('.dot');
         // slides[currentSlide].classList.remove('portfolio-item-active');
         prevSlide(slides, currentSlide, 'portfolio-item-active');
         prevSlide(dots, currentSlide, 'dot-active');
@@ -42,9 +71,8 @@ const slider = () => {
         nextSlide(dots, currentSlide, 'dot-active');
     };
 
-
     // Метод запуска слайдера cо значением по умолчанию
-    const startSlide = (timer = 15000) => {
+    const startSlide = (timer = 1500) => {
         interval = setInterval(autoSlide, timer);
     };
 
@@ -58,6 +86,8 @@ const slider = () => {
     sliderBlock.addEventListener('click', (e) => {
         // Сбрасываем стандартное поведений элементов
         e.preventDefault();
+
+        dots = document.querySelectorAll('.dot');
 
         // Разрешаем клик только по кнопкам
         if (!e.target.matches('.dot, .portfolio-btn')) {
@@ -111,6 +141,7 @@ const slider = () => {
         }
     }, true);
 
+    addDots();
     startSlide();
 };
 
