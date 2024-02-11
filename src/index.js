@@ -9,6 +9,7 @@ import validationCalculator from './modules/validationCalculator';
 import validationForm from './modules/validationForm';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
+import swiper from './modules/swiper';
 
 // import one from './modules/one';
 // import two from './modules/two';
@@ -24,6 +25,7 @@ validationForm('form2');
 validationForm('form3');
 tabs();
 slider();
+swiper();
 
 // one();
 // two();
