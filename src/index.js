@@ -10,6 +10,9 @@ import validationForm from './modules/validationForm';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
 
+import one from './modules/one';
+import two from './modules/two';
+
 timer('2 february 2024');
 menu();
 modal();
@@ -21,3 +24,6 @@ validationForm('form2');
 validationForm('form3');
 tabs();
 slider();
+
+one();
+two();
