@@ -1,5 +1,8 @@
 'use strict';
 
+import { animate } from './helpers';
+
+
 const modal = () => {
     const modal = document.querySelector('.popup');
     const buttons = document.querySelectorAll('.popup-btn');
@@ -8,21 +11,36 @@ const modal = () => {
     console.log(windowWidth);
     const mobileWidth = 768;
 
-    let countOpacity = 0;
+    // let countOpacity = 0;
 
-    // Анимация повления модального окна
+    // Анимация повления модального окна old
+    // const animationOpenModal = () => {
+    //     countOpacity += 0.125;
+    //     console.log(countOpacity);
+
+    //     modal.style.opacity = `${countOpacity}`;
+
+
+    //     if (countOpacity < 1) {
+    //         setTimeout(animationOpenModal, 25);
+    //     } else {
+    //         countOpacity = 0;
+    //     }
+    // };
+
+
+    // Анимация повления модального окна через помощник animate
     const animationOpenModal = () => {
-        countOpacity += 0.125;
-        console.log(countOpacity);
-
-        modal.style.opacity = `${countOpacity}`;
-
-
-        if (countOpacity < 1) {
-            setTimeout(animationOpenModal, 25);
-        } else {
-            countOpacity = 0;
-        }
+        animate({
+            duration: 300,
+            timing(timeFraction) {
+                return timeFraction;
+            },
+            draw(progress) {
+                modal.style.opacity = progress;
+                // modal.style.transform = `scale(${progress})`;
+            }
+        });
     };
 
     // Открытие модального окна при нажатии на одну из кнопок "Оставить заявку!"
