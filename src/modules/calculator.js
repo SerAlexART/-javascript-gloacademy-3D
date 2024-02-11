@@ -1,5 +1,7 @@
 'use strict';
 
+import { animate } from './helpers';
+
 const calculator = (price = 100) => {
     const calcBlock = document.querySelector('.calc-block');
     const calcType = document.querySelector('.calc-type');
@@ -53,7 +55,22 @@ const calculator = (price = 100) => {
             totalValue = 0;
         }
 
-        calcTotal.textContent = totalValue;
+        // * Анимация появления цифр
+        if (totalValue > 0) {
+            animate({
+                duration: 300,
+                timing(timeFraction) {
+                    return 1 - Math.sin(Math.acos(timeFraction));
+                },
+                draw(progress) {
+                    calcTotal.textContent = Math.round(totalValue * progress);
+                    // calcTotal.textContent = totalValue;
+                }
+            });
+        } else {
+            calcTotal.textContent = totalValue;
+        }
+
     };
 
     calcBlock.addEventListener('input', (e) => {

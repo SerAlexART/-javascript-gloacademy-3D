@@ -34,7 +34,7 @@ const modal = () => {
         animate({
             duration: 300,
             timing(timeFraction) {
-                return timeFraction;
+                return 1 - Math.sin(Math.acos(timeFraction));
             },
             draw(progress) {
                 modal.style.opacity = progress;
