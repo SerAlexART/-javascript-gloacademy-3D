@@ -10,6 +10,7 @@ import validationForm from './modules/validationForm';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
 import swiper from './modules/swiper';
+import sendForm from './modules/sendForm';
 
 // import one from './modules/one';
 // import two from './modules/two';
@@ -26,6 +27,24 @@ validationForm('form3');
 tabs();
 slider();
 swiper();
+
+
+// Передаём аргумент
+// sendForm('form1');
+
+// Передаём не просто аргумент, а объект у которого будет formId
+sendForm({
+    formId: 'form1',
+    someElement: [
+        {
+            // * Кастомизируем массив, пример ниже это просто пример, который не берётся из input и т.д.
+            // type может быть как block, так и input, span и т.д
+            type: 'block',
+            // Может получать textContent, value и т.д. в зависимости от типа
+            id: 'total'
+        }
+    ]
+});
 
 // one();
 // two();
