@@ -3,20 +3,13 @@
 // *  new FormData() - собирает данные из формы, но только тех элементов у которых есть атрибут name
 // Отправка в формате Json
 // Собираем все элементы с формы и получаем объект + собираем дополнительные свойства
-// Валидируем код, если нет отдельной обрабатывающей функции
-
+// Валидируем код, с отдельной функцией обрабатывающей события
 
 // const sendForm = (formId) => {
 
 // Принимает объект со свойстами formId с массивов someElement внутри объекта
 const sendForm = ({ formId, someElement = [] }) => {
     const form = document.getElementById(formId);
-
-    // * Создаём блок, который отображается при отправки данных
-    const statusBlock = document.createElement('div');
-    const loadText = 'Загрузка...';
-    const errorText = 'Ошибка...';
-    const successText = 'Спасибо! Наш менеджер с вами свяжется.';
 
     // * Реализуем запрет отправки данных, если данные пустые или неверно заполнены в полях ввода
     // Один из способов навесить на каждый input с определённым name определённый обработчик, например обработчик input и валидировать данные при их вводе. При вводе правильных данных добавлять допустим класс 'success', а при ошибке добавлять класс 'error'
@@ -27,6 +20,12 @@ const sendForm = ({ formId, someElement = [] }) => {
         // При каждом submit через функцию validate проверим наличие классов 'success'
         let success = true;
 
+        list.forEach((input) => {
+            if (!input.classList.contains('success')) {
+                // Если у элемента не будет класса 'success', то переменная success = false
+                success = false;
+            }
+        });
 
         // Возвращаем success
         return success;
@@ -51,8 +50,10 @@ const sendForm = ({ formId, someElement = [] }) => {
         }).then(response => response.json());
     };
 
-    // Отправка формы
-    const submitForm = () => {
+
+    form.addEventListener('submit', (event) => {
+        // Отменим поведение по умолчанию события submit у формы, которое отправляем данные методом GET и перезагружает страницу
+        event.preventDefault();
 
         // Находим все input внутри form
         const formElements = form.querySelectorAll('input');
@@ -63,10 +64,6 @@ const sendForm = ({ formId, someElement = [] }) => {
         // Собираем из FormData объект, пока пустой, далее через forEach из FormData мы будем его наполнять
         // * Иногда случается так, что к отправляемым данным нам нужно добавлять дополнительные свойства, например из каких-нибудь обычных блоков(их текстовое содержимое) нам необходимо засунуть дополнительные данные. И для подобных вещей нам будет очень-очень удобен объект formBody
         const formBody = {};
-
-        // Добавляем блок с текстом загрузки
-        statusBlock.textContent = loadText;
-        form.append(statusBlock);
 
         // Перебираем FormData через forEach
         formData.forEach((value, key) => {
@@ -92,72 +89,33 @@ const sendForm = ({ formId, someElement = [] }) => {
                 // Вытаскивает input содержимое, если type === 'input'
                 formBody[element.id] = elementForm.value;
             }
+
+
         });
 
 
         console.log('submit');
 
 
+        // * Валидируем все input
+        // validate(formElements);
+        // console.log(validate(formElements));
+
+        if (validate(formElements)) {
+            sendData(formBody).
+                then(data => {
+                    console.log(data);
+                });
+        } else (
+            alert('Данные не валидны!')
+        );
+
         // В первый метод then() уже придут обработанные данные, которые вернёт нам сервер после успешной отправки. Отправляем FormData с собранными данными
         // sendData(formBody).
         //     then(data => {
         //         console.log(data);
         //     });
-
-
-
-        // * Валидируем все input
-        // validate(formElements);
-        // console.log(validate(formElements));
-        if (validate(formElements)) {
-            sendData(formBody).
-                then(data => {
-                    // Меняем текст при успешной отправки
-                    statusBlock.textContent = successText;
-
-                    // console.log(data);
-                    // Очищаем value после отправки
-                    formElements.forEach((input) => {
-                        input.value = '';
-                    });
-                }).
-                catch(errorr => {
-                    statusBlock.textContent = errorText;
-                });
-        } else (
-            alert('Данные не валидны!')
-        );
-    };
-
-    // Отправка данных при отправки формы
-    // form.addEventListener('submit', (event) => {
-    //     // Отменим поведение по умолчанию события submit у формы, которое отправляем данные методом GET и перезагружает страницу
-    //     event.preventDefault();
-
-    //     submitForm();
-    // });
-
-
-    // Обрабатываем ошибку, вдруг мы не тот id передали или верстальщик уберёт элемент. Это помогает продолжать работать остальному приложению, помимо допустим формы, в которой произошла ошибка
-    //  То-есть через try catch проверили наличие формы
-    try {
-        // Добавляем собщение об ошибке, если элемента формы нет
-        if (!form) {
-            throw new Error('Верни форму на место, пожалуйста =)');
-        }
-
-
-        // Отправка данных при отправки формы
-        form.addEventListener('submit', (event) => {
-            // Отменим поведение по умолчанию события submit у формы, которое отправляем данные методом GET и перезагружает страницу
-            event.preventDefault();
-
-            submitForm();
-        });
-
-    } catch (error) {
-        console.log(error.message);
-    }
+    });
 };
 
 export default sendForm;
