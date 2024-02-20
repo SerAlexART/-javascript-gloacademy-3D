@@ -1,50 +1,33 @@
 'use strict';
+
+// *  new FormData() - собирает данные из формы, но только тех элементов у которых есть атрибут name
+// Отправка в формате Json
+// Собираем все элементы с формы и получаем объект + собираем дополнительные свойства
+// Валидируем код, если нет отдельной обрабатывающей функции
+// / !!! phpmailer !!!
+
+
+// const sendForm = (formId) => {
+
+// Принимает объект со свойстами formId с массивов someElement внутри объекта
 const sendForm = ({ formId, someElement = [] }) => {
     const form = document.getElementById(formId);
 
+    // * Создаём блок, который отображается при отправки данных
     const statusBlock = document.createElement('div');
     const loadText = 'Загрузка...';
     const errorText = 'Ошибка...';
     const successText = 'Спасибо! Наш менеджер с вами свяжется.';
 
     // * Реализуем запрет отправки данных, если данные пустые или неверно заполнены в полях ввода
+    // Один из способов навесить на каждый input с определённым name определённый обработчик, например обработчик input и валидировать данные при их вводе. При вводе правильных данных добавлять допустим класс 'success', а при ошибке добавлять класс 'error'
+    // Для подобной реализации должна быть отдельная функция и отдельный обработчик события, например input, которые и будет реализовывать навешивание на элементы классов 'success' и 'error'
     const validate = (list) => {
         // console.log(list);
-        let phone;
-        let name;
-        let message;
 
+        // При каждом submit через функцию validate проверим наличие классов 'success'
         let success = true;
 
-        list.forEach((key) => {
-            if (key.name === 'user_phone') {
-
-                console.log(key);
-                console.log(key.name);
-                console.log(key.value);
-
-                phone = /[\d\-\+\(\)]/.test(key.value);
-                console.log(phone);
-                // phone = key.replace(/[^\d\-\+\(\)]/, '');
-
-                // console.log(input.value);
-                // e.target.value = e.target.value.replace(/[^а-яА-Я\-\ ]+/, '');
-            } else if (key.name === 'user_name') {
-                name = /^[а-яА-Я\s]+$/g.test(key.value);
-                console.log(name);
-
-            } else if (key.name === 'user_message') {
-                message = /^[а-яА-Я0-9\s\.\,\?\!\:\;\"\-\(\)]+$/.test(key.value);
-                console.log(message);
-
-            }
-        });
-
-        if (phone === false || name === false || message === false) {
-            success = false;
-        }
-
-        console.log(`Статус = ${success}`);
 
         // Возвращаем success
         return success;
@@ -142,11 +125,11 @@ const sendForm = ({ formId, someElement = [] }) => {
                         input.value = '';
                     });
                 }).
-                catch(error => {
+                catch(errorr => {
                     statusBlock.textContent = errorText;
                 });
         } else (
-            alert('Данные не валидны! Пожалуйста, проверьте правильность заполнения данных.')
+            alert('Данные не валидны!')
         );
     };
 

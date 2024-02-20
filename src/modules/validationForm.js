@@ -36,7 +36,7 @@ const validationForm = (formId) => {
     phones.forEach((input) => {
         input.addEventListener('input', (e) => {
             console.log(input.value);
-            e.target.value = e.target.value.replace(/[^\d\-\(\)]/, '');
+            e.target.value = e.target.value.replace(/[^\d\-\+\(\)]/, '');
         });
     });
 };
