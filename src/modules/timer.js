@@ -6,7 +6,6 @@ const timer = (deadline) => {
     const timerMinutes = document.getElementById('timer-minutes');
     const timerSeconds = document.getElementById('timer-seconds');
 
-    // Получаем оставшиеся время
     const getTimeRemaining = () => {
         let dateStop = new Date(deadline).getTime();
         let dateNow = new Date().getTime();
@@ -16,7 +15,6 @@ const timer = (deadline) => {
         let minutes = Math.floor((timeRemaining / 60) % 60);
         let seconds = Math.floor(timeRemaining % 60);
 
-        // Возвращаем объект с данными
         return {
             timeRemaining: timeRemaining,
             days: days,
@@ -26,7 +24,6 @@ const timer = (deadline) => {
         };
     };
 
-    // Обновление времени на странице
     const updateClock = () => {
         let getTime = getTimeRemaining();
 

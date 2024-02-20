@@ -7,9 +7,9 @@ const sendForm = ({ formId, someElement = [] }) => {
     const errorText = 'Ошибка...';
     const successText = 'Спасибо! Наш менеджер с вами свяжется.';
 
+
     statusBlock.style.color = '#FFFFFF';
 
-    // * Реализуем запрет отправки данных, если данные пустые или неверно заполнены в полях ввода
     const validate = (list) => {
         let phone;
         let name;
@@ -25,7 +25,7 @@ const sendForm = ({ formId, someElement = [] }) => {
                 name = /^[а-яА-Я\s]+$/g.test(key.value);
 
             } else if (key.name === 'user_message') {
-                message = /^[а-яА-Я0-9\s\.\,\?\!\:\;\"\-\(\)]+$/.test(key.value);
+                message = /^[а-яА-Я0-9\s\.\,\?\!\:\;\"\-\(\)\d]+$/.test(key.value);
             }
         });
 
@@ -46,7 +46,6 @@ const sendForm = ({ formId, someElement = [] }) => {
         }).then(response => response.json());
     };
 
-    // Отправка формы
     const submitForm = () => {
         const formElements = form.querySelectorAll('input');
         const formData = new FormData(form);
@@ -69,8 +68,6 @@ const sendForm = ({ formId, someElement = [] }) => {
             }
         });
 
-
-
         if (validate(formElements)) {
             sendData(formBody).
                 then(data => {
@@ -79,6 +76,11 @@ const sendForm = ({ formId, someElement = [] }) => {
                     formElements.forEach((input) => {
                         input.value = '';
                     });
+
+                    setTimeout(() => {
+                        console.log('test');
+                        statusBlock.remove();
+                    }, 5000);
                 }).
                 catch(error => {
                     statusBlock.textContent = errorText;
@@ -87,7 +89,6 @@ const sendForm = ({ formId, someElement = [] }) => {
             alert('Данные не валидны! Пожалуйста, проверьте правильность заполнения данных.')
         );
     };
-
 
     try {
         if (!form) {
