@@ -32,11 +32,17 @@ const timer = (deadline) => {
             timerHours.textContent = getTime.hours < 10 ? '0' + getTime.hours : getTime.hours;
             timerMinutes.textContent = getTime.minutes < 10 ? '0' + getTime.minutes : getTime.minutes;
             timerSeconds.textContent = getTime.seconds < 10 ? '0' + getTime.seconds : getTime.seconds;
+        } else if (getTime > 0) {
+            clearInterval(timerId);
         }
     };
 
+    const timerId = setInterval(() => {
+        console.log('Я выполняюсь каждую секунду');
+        updateClock();
+    }, 1000);
+
     updateClock();
-    setInterval(updateClock, 1000);
 };
 
 export default timer;
