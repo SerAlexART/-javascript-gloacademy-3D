@@ -18,6 +18,8 @@ modal();
 calculator();
 validationCalculator();
 validationForm('form1');
+validationForm('form2');
+validationForm('form3');
 tabs();
 slider();
 swiper();
