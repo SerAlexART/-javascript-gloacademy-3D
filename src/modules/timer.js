@@ -1,7 +1,6 @@
 'use strict';
 
 const timer = (deadline) => {
-    const timer = document.querySelector('.timer');
     const timerDays = document.getElementById('timer-days');
     const timerHours = document.getElementById('timer-hours');
     const timerMinutes = document.getElementById('timer-minutes');
@@ -33,21 +32,11 @@ const timer = (deadline) => {
             timerHours.textContent = getTime.hours < 10 ? '0' + getTime.hours : getTime.hours;
             timerMinutes.textContent = getTime.minutes < 10 ? '0' + getTime.minutes : getTime.minutes;
             timerSeconds.textContent = getTime.seconds < 10 ? '0' + getTime.seconds : getTime.seconds;
-
-        } else if (getTime.timeRemaining < 0) {
-            const form = document.getElementById('form1');
-
-            form.style.marginTop = '70px';
-            timer.remove();
         }
     };
 
     updateClock();
     setInterval(updateClock, 1000);
-    // timer.remove();
-
-
-
 };
 
 export default timer;
