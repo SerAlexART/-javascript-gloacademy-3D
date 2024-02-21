@@ -16,7 +16,6 @@ const validationForm = (formId) => {
 
     messages.forEach((input) => {
         input.addEventListener('input', (e) => {
-            // e.target.value = e.target.value.replace(/[^а-яА-Я\-\ \d]/, '');
             e.target.value = e.target.value.replace(/[^а-яА-Я0-9\s\.\,\?\!\:\;\"\-\(\)\d]+$/, '');
         });
     });

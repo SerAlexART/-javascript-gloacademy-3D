@@ -6,6 +6,7 @@ const sendForm = ({ formId, someElement = [] }) => {
     const loadText = 'Загрузка...';
     const errorText = 'Ошибка...';
     const successText = 'Спасибо! Наш менеджер с вами свяжется.';
+    const validateText = 'Данные не валидны! Пожалуйста, проверьте правильность заполнения данных.';
 
     const validate = (list) => {
         let phone;
@@ -16,13 +17,30 @@ const sendForm = ({ formId, someElement = [] }) => {
 
         list.forEach((key) => {
             if (key.name === 'user_phone') {
-                phone = /[\d\-\+\(\)]/.test(key.value);
+                phone = /[\d\-\+\(\)^]/.test(key.value);
+                if (phone === false) {
+                    key.style.border = '2px solid red';
+                } else {
+                    key.style.border = '';
+                }
 
             } else if (key.name === 'user_name') {
                 name = /^[а-яА-Я\s]+$/g.test(key.value);
 
+                if (name === false) {
+                    key.style.border = '2px solid red';
+                } else {
+                    key.style.border = '';
+                }
+
             } else if (key.name === 'user_message') {
                 message = /^[а-яА-Я0-9\s\.\,\?\!\:\;\"\-\(\)\d]+$/.test(key.value);
+
+                if (message === false) {
+                    key.style.border = '2px solid red';
+                } else {
+                    key.style.border = '';
+                }
             }
         });
 
@@ -49,6 +67,7 @@ const sendForm = ({ formId, someElement = [] }) => {
         const formBody = {};
 
         statusBlock.textContent = loadText;
+        statusBlock.style.color = '#ffffff';
         form.append(statusBlock);
 
         formData.forEach((value, key) => {
@@ -69,6 +88,7 @@ const sendForm = ({ formId, someElement = [] }) => {
             sendData(formBody).
                 then(data => {
                     statusBlock.textContent = successText;
+                    statusBlock.style.color = 'green';
 
                     formElements.forEach((input) => {
                         input.value = '';
@@ -80,10 +100,12 @@ const sendForm = ({ formId, someElement = [] }) => {
                 }).
                 catch(error => {
                     statusBlock.textContent = errorText;
+                    statusBlock.style.color = 'red';
                 });
-        } else (
-            alert('Данные не валидны! Пожалуйста, проверьте правильность заполнения данных.')
-        );
+        } else {
+            statusBlock.textContent = validateText;
+            statusBlock.style.color = 'red';
+        }
     };
 
     statusBlock.style.color = '#FFFFFF';
