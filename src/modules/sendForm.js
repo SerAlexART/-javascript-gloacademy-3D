@@ -7,9 +7,6 @@ const sendForm = ({ formId, someElement = [] }) => {
     const errorText = 'Ошибка...';
     const successText = 'Спасибо! Наш менеджер с вами свяжется.';
 
-
-    statusBlock.style.color = '#FFFFFF';
-
     const validate = (list) => {
         let phone;
         let name;
@@ -78,7 +75,6 @@ const sendForm = ({ formId, someElement = [] }) => {
                     });
 
                     setTimeout(() => {
-                        console.log('test');
                         statusBlock.remove();
                     }, 5000);
                 }).
@@ -89,6 +85,8 @@ const sendForm = ({ formId, someElement = [] }) => {
             alert('Данные не валидны! Пожалуйста, проверьте правильность заполнения данных.')
         );
     };
+
+    statusBlock.style.color = '#FFFFFF';
 
     try {
         if (!form) {
@@ -102,7 +100,7 @@ const sendForm = ({ formId, someElement = [] }) => {
         });
 
     } catch (error) {
-        console.log(error.message);
+        alert(error.message);
     }
 };
 

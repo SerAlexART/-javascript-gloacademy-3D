@@ -12,7 +12,7 @@ import swiper from './modules/swiper';
 import sendForm from './modules/sendForm';
 
 
-timer('2 february 2024');
+timer('18 april 2024');
 menu();
 modal();
 calculator();
