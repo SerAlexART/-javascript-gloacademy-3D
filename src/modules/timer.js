@@ -38,7 +38,6 @@ const timer = (deadline) => {
     };
 
     const timerId = setInterval(() => {
-        console.log('Я выполняюсь каждую секунду');
         updateClock();
     }, 1000);
 
