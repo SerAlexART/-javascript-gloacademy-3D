@@ -9,6 +9,7 @@ import validationForm from './modules/validationForm';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
 import swiper from './modules/swiper';
+import smoothScroll from './modules/smoothScroll';
 import sendForm from './modules/sendForm';
 
 
@@ -23,6 +24,7 @@ validationForm('form3');
 tabs();
 slider();
 swiper();
+smoothScroll('[href = "#service-block"]', 'service-block');
 sendForm({ formId: 'form1' });
 sendForm({ formId: 'form2' });
 sendForm({ formId: 'form3' });
